@@ -17,6 +17,14 @@ from user.models import UserProfile
 
 
 
+def index(request):
+
+    return render (
+                    request,
+                    'index.html',
+                    
+                    )
+
 def home(request):
     context = {'items': Product.objects.all()}
 

@@ -1,0 +1,90 @@
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Welcome</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "css/bootstrap.min.css"%}" rel="stylesheet">
+    <link href="{% static "css/bootstrap.min.css"%}" rel="stylesheet">
+    <link href="{% static "css/font-awesome.min.css"%}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/custom.css"%}" rel="stylesheet">
+
+</head>
+
+
+<body style="padding-top:40px;">
+
+<div class="container">
+
+	<div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        	 <a href="/"><img src="{% static "img/Logo.png"%}" class="center-block" style="width:50%">
+                </a></h2>
+          <ul class="nav nav-justified">
+            <li id="menu1" class="current"><a href="/">NEW ARRIVAL</a></li>
+{#            <li id="menu2"><a href="/preferences"></a></li>#}
+            <!-- <li id="menu3" class="grey-border"><a href="/trial_room">PACK</a></li> -->
+            <li id="menu4"><a href="/search/">SEARCH</a></li>
+            <li id="menu5" class="grey-border"><a href="#checkout" id="check-link">GO</a></li>
+{#            <li id="menu6"><a href="/user_profile/">PROFILE</a></li>#}
+          </ul>
+        </div>
+    </nav>
+    </div>
+
+</div>
+<script src="{% static "js/jquery-1.11.0.min.js" %}"></script>
+
+<script>
+$(document).on("click",".checkout-btn",function(){
+		var product_id = $(this).attr("id");
+		if(localStorage["cart"])
+		{ 	var cart = localStorage["cart"].split("/");
+			if($.inArray(product_id,cart) == -1)
+			{
+				cart.push(product_id);
+				localStorage["cart"] = cart.join("/");
+			}
+			else
+			{
+				alert("This product is already in the cart, go to the checkout section for buying.",null);
+				return;
+			}
+		}
+		else
+		{ localStorage["cart"] = product_id; }
+		alert("Successfully added to cart, go to the checkout section for buying.",null);
+	});
+  $('#check-link').click(function(){
+                  var items = localStorage['cart'];
+                  if(!localStorage['cart']){
+                      url = "/checkout/"
+                  }else {
+                      url = "/checkout/" + localStorage['cart'];
+                  }
+
+                  console.log(url);
+                  window.location.replace(url);
+
+              });
+
+</script>

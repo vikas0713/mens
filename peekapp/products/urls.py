@@ -4,7 +4,7 @@ from products.views import *
 
 urlpatterns = [
 
-        url(r'^$',home),
+        url(r'^$',index),
         url(r'^index$',home),
         url(r'^form/$', forms),
         url(r'^preferences/$',preferences),
